@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Items = db.define('Items', {
+const Items = db.define('items', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -16,7 +16,7 @@ const Items = db.define('Items', {
       'https://vignette.wikia.nocookie.net/super-mario-kart-racing/images/5/5b/Item_Box_-_Mario_Kart_Wii.png/revision/latest?cb=20170331001434'
   },
   price: {
-    type: Sequelize.DECIMAL(3, 2),
+    type: Sequelize.FLOAT,
     allowNull: false
   },
   description: {
