@@ -1,20 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {fetchCountries} from '../reducers/countryReducer'
+import {fetchItems} from '../store'
 import {Link} from 'react-router-dom'
 // import { Items } from '../server/db/models'
 
 class AllItems extends React.Component {
   componentDidMount() {
-    // this.props.fetchCountries()
+    this.props.fetchItems()
   }
 
   render() {
-    const {countries} = this.props
-    console.log('THESE ARE MY COUNTRIES PROPS', this.props)
+    // const {countries} = this.props
+    console.log('THESE ARE MY ITEMS PROPS', this.props)
     return (
       <div>
-        <h3>Here are a List of Countries with Aircrafts: </h3>
+        <h2>THIS IS WHERE OUR PRODUCTS WILL GO</h2>
+        {/* <h3>Here are a List of Countries with Aircrafts: </h3>
         {countries.map(function(singleCountry, idx) {
           return (
             <div key={idx}>
@@ -25,7 +26,7 @@ class AllItems extends React.Component {
             </div>
           )
         })}
-        <CountryForm />
+        <CountryForm /> */}
       </div>
     )
   }
@@ -38,13 +39,12 @@ class AllItems extends React.Component {
 //   }
 // }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     fetchCountries: function() {
-//       dispatch(fetchCountries())
-//     }
-//   }
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchItems: function() {
+      dispatch(fetchItems())
+    }
+  }
+}
 
-export default AllItems
-// export default connect(mapStateToProps, null)(AllItems)
+export default connect(null, mapDispatchToProps)(AllItems)
