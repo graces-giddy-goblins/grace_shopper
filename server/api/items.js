@@ -10,4 +10,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const foundItem = await Items.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.json(foundItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
