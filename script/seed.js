@@ -27,6 +27,15 @@ const items = [
     price: 499.99,
     description:
       "Having trouble keeping your significant other? Want that cutie that sits at the back of class? Now it's easier than ever to get their affection! Just slip some love potion into their drink and...viola! Enough potion in each vile for five days."
+  },
+  {
+    name: 'Whacky Broomstick',
+    quantity: 0,
+    imageUrl:
+      'https://5.imimg.com/data5/SF/YV/MY-33039804/plastic-broomstick-500x500.jpg',
+    price: 10.99,
+    description:
+      'Being whacked has never been so easy! Buy one of these stylish broomsticks and whack whomever you want, whenever you want!'
   }
 ]
 

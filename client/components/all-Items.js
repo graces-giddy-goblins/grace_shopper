@@ -4,14 +4,14 @@ import {fetchItems} from '../store/items'
 import {Link} from 'react-router-dom'
 // import { Items } from '../server/db/models'
 
-class AllItems extends React.Component {
+export class AllItems extends React.Component {
   componentDidMount() {
     this.props.fetchItems()
   }
 
   render() {
     const {items} = this.props.items
-    console.log('THESE ARE MY ITEMS PROPS', this.props)
+    //console.log('THESE ARE MY ITEMS PROPS', items)
     return (
       <div>
         <h2>MAGICAL DELIGHTS</h2>

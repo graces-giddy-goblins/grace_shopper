@@ -29,12 +29,4 @@ describe('User routes', () => {
       expect(res.body[0].email).to.be.equal(codysEmail)
     })
   }) // end describe('/api/users')
-
-  describe('GET /api/users/:userId/cart route', () => {
-    it('gets all items associated with a user', async () => {
-      const response = await agent.get('/api/users/1/cart').expect(200)
-      expect(response.body).to.have.length(2)
-      expect(response.body[0].userId).to.equal(1)
-    })
-  })
 }) // end describe('User routes')

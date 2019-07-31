@@ -32,7 +32,6 @@ const getItem = singleItem => ({
 export const fetchItems = () => async dispatch => {
   try {
     const res = await axios.get('/api/items')
-    console.log('AM I FETCHING ANYTHING', res)
     dispatch(getAllItems(res.data))
   } catch (err) {
     console.error(err)

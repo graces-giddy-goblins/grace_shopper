@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
-import AllItems from './components/all-Items'
+import AllItems from './components/all-Items' //using the export default connect
 import {me} from './store'
 
 /**
