@@ -69,6 +69,7 @@ const mapDispatch = dispatch => {
   }
 }
 
+//AuthForm is being wrapped in Login component and Signup component
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 

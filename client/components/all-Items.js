@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchItems} from '../store'
+import {fetchItems} from '../store/items'
 import {Link} from 'react-router-dom'
 // import { Items } from '../server/db/models'
 

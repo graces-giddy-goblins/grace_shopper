@@ -9,6 +9,8 @@ import App from './app'
 // establishes socket connection
 import './socket'
 
+//REACTDOM.RENDER ONLY RENDERS ONE TIME!!!
+//MAIN RENDER
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

@@ -29,6 +29,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         )}
       </nav>
       <hr />
+      {/* SHOULD BE ON ROUTES.JS FILE */}
       <Route exact path="/items" component={AllItems} />
     </div>
   </HashRouter>
