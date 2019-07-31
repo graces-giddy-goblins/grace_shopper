@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Items} = require('../server/db/models')
+const {User, Items, Cart, Order} = require('../server/db/models')
 
 const items = [
   {
@@ -39,6 +39,23 @@ const items = [
   }
 ]
 
+const codysOrders = [
+  {
+    complete: false,
+    userId: 1
+  }
+]
+
+const codysCart = [
+  {
+    name: 'Whacky Broomstick',
+    quantity: 1,
+    imageUrl:
+      'https://5.imimg.com/data5/SF/YV/MY-33039804/plastic-broomstick-500x500.jpg',
+    price: 10.99
+  }
+]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -53,6 +70,14 @@ async function seed() {
       return Items.create(item)
     })
   )
+
+  let all_Order = await Promise.all(
+    codysOrders.map(function(order) {
+      return Order.create(order)
+    })
+  )
+
+  let all_Carts = await Promise.all(codysOrders[0].addItems(items[3]))
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
