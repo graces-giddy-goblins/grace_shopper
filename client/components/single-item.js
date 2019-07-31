@@ -31,7 +31,11 @@ class SingleItem extends React.Component {
         <img src={imageUrl} />
         <h3>{price}</h3>
         <h3>{description}</h3>
-        <button>Add to Cart</button>
+
+        <p>
+          Quantity <input type="number" name="quantity" min="1" max="30" />
+          <button>Add to Cart</button>
+        </p>
       </div>
     )
   }
