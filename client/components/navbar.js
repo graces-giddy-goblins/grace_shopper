@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {HashRouter, Link, Route} from 'react-router-dom'
-import AllItems from './all-Items'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
@@ -28,7 +27,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       )}
     </nav>
     <hr />
-    {/* SHOULD BE ON ROUTES.JS FILE */}
   </div>
 )
 

@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Items} = require('../server/db/models')
+const {User, Items, Cart, Order} = require('../server/db/models')
 
 const items = [
   {
@@ -18,6 +18,39 @@ const items = [
     quantity: 0,
     price: 25.0,
     description: "Nobody will know you're even wearing a Hat!"
+  },
+  {
+    name: 'Love Potion',
+    quantity: 0,
+    imageUrl:
+      'https://images-na.ssl-images-amazon.com/images/I/71qwadFXbWL._SX355_.jpg',
+    price: 499.99,
+    description:
+      "Having trouble keeping your significant other? Want that cutie that sits at the back of class? Now it's easier than ever to get their affection! Just slip some love potion into their drink and...viola! Enough potion in each vile for five days."
+  },
+  {
+    name: 'Whacky Broomstick',
+    quantity: 0,
+    imageUrl:
+      'https://5.imimg.com/data5/SF/YV/MY-33039804/plastic-broomstick-500x500.jpg',
+    price: 10.99,
+    description:
+      'Being whacked has never been so easy! Buy one of these stylish broomsticks and whack whomever you want, whenever you want!'
+  }
+]
+
+const codysOrders = [
+  {
+    complete: false,
+    userId: 1
+  }
+]
+
+const codysCart = [
+  {
+    quantity: 1,
+    orderId: 1,
+    itemId: 4
   }
 ]
 
@@ -35,6 +68,20 @@ async function seed() {
       return Items.create(item)
     })
   )
+
+  let all_Order = await Promise.all(
+    codysOrders.map(function(order) {
+      return Order.create(order)
+    })
+  )
+
+  let all_Carts = await Promise.all(
+    codysCart.map(function(cart) {
+      return Cart.create(cart)
+    })
+  )
+
+  // let all_Carts = await Promise.all(codysOrders[0].addItems(items[3]))
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
