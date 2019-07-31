@@ -16,7 +16,7 @@ const Items = db.define('items', {
       'https://vignette.wikia.nocookie.net/super-mario-kart-racing/images/5/5b/Item_Box_-_Mario_Kart_Wii.png/revision/latest?cb=20170331001434'
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false
   },
   description: {

@@ -10,34 +10,35 @@ class AllItems extends React.Component {
   }
 
   render() {
-    // const {countries} = this.props
+    const {items} = this.props.items
     console.log('THESE ARE MY ITEMS PROPS', this.props)
     return (
       <div>
-        <h2>THIS IS WHERE OUR PRODUCTS WILL GO</h2>
-        {/* <h3>Here are a List of Countries with Aircrafts: </h3>
-        {countries.map(function(singleCountry, idx) {
+        <h2>MAGICAL DELIGHTS</h2>
+        {items.map(function(singleItem, idx) {
           return (
+            // <Link to={`/countries/${singleCountry.id}`}>
+            //     <h2>{singleCountry.name}</h2>
+            //     <img src={singleCountry.flagUrl} width="200" />
+            //   </Link>
             <div key={idx}>
-              <Link to={`/countries/${singleCountry.id}`}>
-                <h2>{singleCountry.name}</h2>
-                <img src={singleCountry.flagUrl} width="200" />
-              </Link>
+              <h3>{singleItem.name}</h3>
+              <h3>{singleItem.price}</h3>
+              <img src={singleItem.imageUrl} />
             </div>
           )
         })}
-        <CountryForm /> */}
       </div>
     )
   }
 }
 
 //I mapped my state to props, and one of the keys is "countries"
-// function mapStateToProps(state) {
-//   return {
-//     countries: state.countries
-//   }
-// }
+function mapStateToProps(state) {
+  return {
+    items: state.items
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -47,4 +48,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(AllItems)
+export default connect(mapStateToProps, mapDispatchToProps)(AllItems)
