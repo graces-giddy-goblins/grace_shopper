@@ -18,6 +18,15 @@ const items = [
     quantity: 0,
     price: 25.0,
     description: "Nobody will know you're even wearing a Hat!"
+  },
+  {
+    name: 'Love Potion',
+    quantity: 0,
+    imageUrl:
+      'https://images-na.ssl-images-amazon.com/images/I/71qwadFXbWL._SX355_.jpg',
+    price: 499.99,
+    description:
+      "Having trouble keeping your significant other? Want that cutie that sits at the back of class? Now it's easier than ever to get their affection! Just slip some love potion into their drink and...viola! Enough potion in each vile for five days."
   }
 ]
 

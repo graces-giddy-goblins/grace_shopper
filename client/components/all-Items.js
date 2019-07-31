@@ -17,14 +17,15 @@ class AllItems extends React.Component {
         <h2>MAGICAL DELIGHTS</h2>
         {items.map(function(singleItem, idx) {
           return (
-            // <Link to={`/countries/${singleCountry.id}`}>
-            //     <h2>{singleCountry.name}</h2>
-            //     <img src={singleCountry.flagUrl} width="200" />
-            //   </Link>
+            //CHECK TO MAKE SURE LINKS WORK AFTER WE PULL REQUEST
             <div key={idx}>
-              <h3>{singleItem.name}</h3>
+              <Link to={`/items/${singleItem.id}`}>
+                <h3>{singleItem.name}</h3>
+              </Link>
               <h3>{singleItem.price}</h3>
-              <img src={singleItem.imageUrl} />
+              <Link to={`/items/${singleItem.id}`}>
+                <img src={singleItem.imageUrl} />
+              </Link>
             </div>
           )
         })}
