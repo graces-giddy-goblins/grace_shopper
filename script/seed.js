@@ -48,11 +48,9 @@ const codysOrders = [
 
 const codysCart = [
   {
-    name: 'Whacky Broomstick',
     quantity: 1,
-    imageUrl:
-      'https://5.imimg.com/data5/SF/YV/MY-33039804/plastic-broomstick-500x500.jpg',
-    price: 10.99
+    orderId: 1,
+    itemId: 4
   }
 ]
 
@@ -77,7 +75,13 @@ async function seed() {
     })
   )
 
-  let all_Carts = await Promise.all(codysOrders[0].addItems(items[3]))
+  let all_Carts = await Promise.all(
+    codysCart.map(function(cart) {
+      return Cart.create(cart)
+    })
+  )
+
+  // let all_Carts = await Promise.all(codysOrders[0].addItems(items[3]))
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
