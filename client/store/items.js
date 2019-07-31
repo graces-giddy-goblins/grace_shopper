@@ -40,7 +40,7 @@ export const fetchItems = () => async dispatch => {
 
 export const fetchSingleItem = id => async dispatch => {
   try {
-    const res = await axios.get('/api/items/' + id)
+    const res = await axios.get(`/api/items/${id}`)
     dispatch(getItem(res.data))
   } catch (err) {
     console.error(err)

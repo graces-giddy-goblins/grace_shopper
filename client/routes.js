@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import AllItems from './components/all-Items' //using the export default connect
 import {me} from './store'
+import SingleItem from './components/single-item'
 
 /**
  * COMPONENT
@@ -23,6 +24,8 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/items" component={AllItems} />
+        <Route path="/items/:id" component={SingleItem} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
