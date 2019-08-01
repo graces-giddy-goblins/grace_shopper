@@ -45,4 +45,30 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.delete('/', async (req, res, next) => {
+  try {
+    const foundOrder = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        complete: false
+      }
+    })
+
+    const foundCart = await Cart.findOne({
+      where: {
+        orderId: foundOrder.id
+      }
+    })
+
+    const deletedItem = await foundCart.destroy({
+      where: {
+        itemId: req.body
+      }
+    })
+    res.send(deletedItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
