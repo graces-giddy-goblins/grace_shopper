@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
     }
     const newCartItem = await Cart.create({
       orderId: order.id,
-      itemId: req.body.id,
+      itemId: req.body.itemId,
       quantity: req.body.quantity
     })
     res.json(newCartItem)

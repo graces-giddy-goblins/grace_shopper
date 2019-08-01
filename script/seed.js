@@ -46,13 +46,13 @@ const codysOrders = [
   }
 ]
 
-const codysCart = [
-  {
-    quantity: 1,
-    orderId: 1,
-    itemId: 4
-  }
-]
+// const codysCart = [
+//   {
+//     quantity: 1,
+//     orderId: 1,
+//     itemId: 4
+//   }
+// ]
 
 async function seed() {
   await db.sync({force: true})

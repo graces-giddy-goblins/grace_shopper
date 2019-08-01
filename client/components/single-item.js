@@ -57,19 +57,20 @@ class SingleItem extends React.Component {
         <h3>{price}</h3>
         <h3>{description}</h3>
 
-        <p>
-          Quantity{' '}
-          <input
-            type="number"
-            name="quantity"
-            min="1"
-            max="30"
-            value={this.state.quantity}
-          />
-          <button type="submit" onClick={this.handleSubmit}>
-            Add to Cart
-          </button>
-        </p>
+        <form onSubmit={this.handleSubmit}>
+          <p>
+            Quantity{' '}
+            <input
+              type="number"
+              name="quantity"
+              min="1"
+              max="30"
+              value={this.state.quantity}
+              onChange={this.handleChange}
+            />
+            <button type="submit">Add to Cart</button>
+          </p>
+        </form>
       </div>
     )
   }
