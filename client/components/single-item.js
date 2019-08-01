@@ -1,27 +1,52 @@
 import React from 'react'
 import {fetchSingleItem} from '../store/items'
+import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 
 const mapStateToProps = state => {
   return {
-    singleItem: state.items.singleItem
+    singleItem: state.items.singleItem,
+    cart: state.cart.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSingleItem: id => dispatch(fetchSingleItem(id))
+    fetchSingleItem: id => dispatch(fetchSingleItem(id)),
+    addToCartThunk: item => dispatch(addToCartThunk(item))
   }
 }
 
+const defaultState = {
+  quantity: 1
+}
+
 class SingleItem extends React.Component {
+  constructor() {
+    super()
+    this.state = defaultState
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   componentDidMount() {
     this.props.fetchSingleItem(this.props.match.params.id)
+  }
+  handleSubmit(event) {
+    event.preventDefault()
+    const cartItem = {
+      quantity: this.state.quantity,
+      itemId: this.props.match.params.id
+    }
+    this.props.addToCartThunk(cartItem)
+  }
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
   render() {
     let {name, imageUrl, price, description} = this.props.singleItem
 
-    // console.log(this.props.singleItem)
     if (!this.props.singleItem.name) {
       return <div>Loading...</div>
     }
@@ -33,8 +58,17 @@ class SingleItem extends React.Component {
         <h3>{description}</h3>
 
         <p>
-          Quantity <input type="number" name="quantity" min="1" max="30" />
-          <button>Add to Cart</button>
+          Quantity{' '}
+          <input
+            type="number"
+            name="quantity"
+            min="1"
+            max="30"
+            value={this.state.quantity}
+          />
+          <button type="submit" onClick={this.handleSubmit}>
+            Add to Cart
+          </button>
         </p>
       </div>
     )

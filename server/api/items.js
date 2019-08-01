@@ -10,26 +10,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
-  try {
-    const order = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        complete: false
-      }
-    })
-    if (order) {
-      const newCartItem = await Cart.create({
-        orderId: order.id,
-        itemId: req.body.id
-      })
-      res.json(newCartItem)
-    }
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.get('/:id', async (req, res, next) => {
   try {
     const foundItem = await Items.findOne({

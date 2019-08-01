@@ -15,4 +15,28 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    let order = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        complete: false
+      }
+    })
+    if (!order) {
+      order = await Order.create({
+        userId: req.user.id
+      })
+    }
+    const newCartItem = await Cart.create({
+      orderId: order.id,
+      itemId: req.body.id,
+      quantity: req.body.quantity
+    })
+    res.json(newCartItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
