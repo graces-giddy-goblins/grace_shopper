@@ -3,6 +3,7 @@ const {Items, Cart, Order, User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('USER ', req.user)
     const order = await Order.findOne({
       where: {
         //when we logged-in, it created a req.user which has an id
@@ -22,15 +23,23 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const foundCart = await Order.findOne({
+    const foundOrder = await Order.findOne({
       where: {
-        userId: req.user.id
+        userId: req.user.id,
+        complete: false
       }
     })
 
-    // const updatedCart = await foundCart.update(req.body);
-    res.send(foundCart)
-    // res.send(updatedCart);
+    const foundCart = await Cart.findOne({
+      where: {
+        orderId: foundOrder.id
+      }
+    })
+
+    const updatedCart = await foundCart.update({
+      quantity: req.body.quantity
+    })
+    res.send(updatedCart)
   } catch (err) {
     next(err)
   }

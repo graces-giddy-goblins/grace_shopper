@@ -6,10 +6,6 @@ const Items = db.define('items', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue:
