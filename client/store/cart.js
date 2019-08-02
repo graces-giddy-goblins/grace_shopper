@@ -33,12 +33,25 @@ const removeCart = cart => ({type: REMOVE_CART, cart})
 /**
  * THUNK CREATORS
  */
-export const addToCartThunk = item => async dispatch => {
-  try {
-    const res = await axios.post('/api/cart', item)
-    dispatch(addToCart(res.data))
-  } catch (err) {
-    console.error(err)
+export const getCartThunk = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get('/api/cart')
+      dispatch(getCart(res.data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const addToCartThunk = item => {
+  return async dispatch => {
+    try {
+      const res = await axios.post('/api/cart', item)
+      dispatch(addToCart(res.data))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
@@ -48,7 +61,10 @@ export const addToCartThunk = item => async dispatch => {
 export default function(state = initalState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.cart
+      return {
+        ...state,
+        cart: action.cart
+      }
     case ADD_TO_CART:
       return {...state, cart: [...state.cart, action.item]}
     case REMOVE_CART:

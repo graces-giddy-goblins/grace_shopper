@@ -75,11 +75,11 @@ async function seed() {
     })
   )
 
-  let all_Carts = await Promise.all(
-    codysCart.map(function(cart) {
-      return Cart.create(cart)
-    })
-  )
+  // let all_Carts = await Promise.all(
+  //   codysCart.map(function(cart) {
+  //     return Cart.create(cart)
+  //   })
+  // )
 
   // let all_Carts = await Promise.all(codysOrders[0].addItems(items[3]))
 
