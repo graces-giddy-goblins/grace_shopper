@@ -84,12 +84,27 @@ router.post('/', async (req, res, next) => {
         userId: req.user.id
       })
     }
-    const newCartItem = await Cart.create({
-      orderId: order.id,
-      itemId: req.body.itemId,
-      quantity: req.body.quantity
-    })
-    res.json(newCartItem)
+    const cartTable = await order.getItems()
+    let found = false
+    for (let i = 0; i < cartTable.length; i++) {
+      if (cartTable[i].itemId === req.body.itemId) {
+        cartTable[i].quantity += req.body.quantity
+        found = true
+      }
+    }
+    //FIX ADDING DUPLICATES ROUTE
+    if (!found) {
+      const newCartItem = await Cart.create({
+        orderId: order.id,
+        itemId: req.body.itemId,
+        quantity: req.body.quantity
+      })
+    }
+    const item = await order.getItems()
+    const lastItem = item[item.length - 1]
+    console.log(lastItem)
+    //want to send back what your redux store will actually be putting into our cart array
+    res.json(lastItem)
   } catch (err) {
     next(err)
   }
