@@ -55,6 +55,17 @@ export const addToCartThunk = item => {
   }
 }
 
+export const updateCartThunk = item => {
+  return async dispatch => {
+    try {
+      const res = await axios.put('api/cart', item)
+      dispatch(updateCart(res.data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -67,6 +78,8 @@ export default function(state = initalState, action) {
       }
     case ADD_TO_CART:
       return {...state, cart: [...state.cart, action.item]}
+    case UPDATE_CART:
+      return {...state, cart: action.item}
     case REMOVE_CART:
       return initalState
     default:

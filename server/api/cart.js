@@ -32,14 +32,18 @@ router.put('/', async (req, res, next) => {
 
     const foundCart = await Cart.findOne({
       where: {
-        orderId: foundOrder.id
+        orderId: foundOrder.id,
+        itemId: req.body.itemId
       }
     })
 
     const updatedCart = await foundCart.update({
       quantity: req.body.quantity
     })
-    res.send(updatedCart)
+
+    const fullUpdatedCart = await foundOrder.getItems()
+
+    res.send(fullUpdatedCart)
   } catch (err) {
     next(err)
   }

@@ -1,37 +1,80 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCartThunk} from '../store/cart'
+import {getCartThunk, updateCartThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 
+const defaultState = {
+  quantity: 1
+}
+
 export class Cart extends React.Component {
+  constructor() {
+    super()
+    this.state = defaultState
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   componentDidMount() {
     this.props.getCartThunk()
   }
 
+  handleSubmit(event) {
+    event.preventDefault()
+    const cartItem = {
+      quantity: this.state.quantity,
+      itemId: event.target.id
+    }
+    this.props.updateCartThunk(cartItem)
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   render() {
     let {cart} = this.props.cart
+    // let state = this.state
+    // let handleChange = this.handleChange
+
     if (cart === undefined) {
       return <div>Loading...</div>
     }
-    console.log('THESE ARE MY ITEMS PROPS', cart)
+    // console.log('THESE ARE MY ITEMS PROPS', cart)
+    // console.log("how about this this", this)
     return (
       <div>
         <h2>WHATS IN YOUR CAULDRON</h2>
-        {cart.map(function(singleItem, idx) {
-          return (
-            //CHECK TO MAKE SURE LINKS WORK AFTER WE PULL REQUEST
-            <div key={idx}>
-              <Link to={`/items/${singleItem.id}`}>
-                <h3>{singleItem.name}</h3>
-              </Link>
-              <h3>Price: {singleItem.price}</h3>
-              <h3>Qty: {singleItem.cart.quantity}</h3>
-              <Link to={`/items/${singleItem.id}`}>
-                <img src={singleItem.imageUrl} />
-              </Link>
-            </div>
-          )
-        })}
+        <form onSubmit={this.handleSubmit}>
+          {cart.map(function(singleItem, idx) {
+            // console.log("WHAT IS THIS? ", this)
+            return (
+              //CHECK TO MAKE SURE LINKS WORK AFTER WE PULL REQUEST
+              <div key={idx}>
+                <Link to={`/items/${singleItem.id}`}>
+                  <h3>{singleItem.name}</h3>
+                </Link>
+                <h3>Price: {singleItem.price}</h3>
+                <h3>Qty: {singleItem.cart.quantity}</h3>
+                <Link to={`/items/${singleItem.id}`}>
+                  <img src={singleItem.imageUrl} />
+                </Link>
+                Quantity{' '}
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  max="30"
+                  id={singleItem.id}
+                  value={this.state.quantity}
+                  onChange={this.handleChange}
+                />
+                <button type="submit">Update Quantity</button>
+              </div>
+            )
+          }, this)}
+        </form>
         <h3>
           TOTAL:{' '}
           {cart.reduce((accum, singleItem) => {
@@ -54,6 +97,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getCartThunk: function() {
       dispatch(getCartThunk())
+    },
+    updateCartThunk: function(item) {
+      dispatch(updateCartThunk(item))
     }
   }
 }
