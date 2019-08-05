@@ -4,7 +4,8 @@ import {getCartThunk, updateCartThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 
 const defaultState = {
-  quantity: 1
+  quantity: 1,
+  id: 0
 }
 
 export class Cart extends React.Component {
@@ -22,14 +23,16 @@ export class Cart extends React.Component {
     event.preventDefault()
     const cartItem = {
       quantity: this.state.quantity,
-      itemId: event.target.id
+      itemId: this.state.id
     }
     this.props.updateCartThunk(cartItem)
+    console.log('WHAT IS BEING DISPATCHED', cartItem)
   }
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      id: event.target.id
     })
   }
 
@@ -41,8 +44,6 @@ export class Cart extends React.Component {
     if (cart === undefined) {
       return <div>Loading...</div>
     }
-    // console.log('THESE ARE MY ITEMS PROPS', cart)
-    // console.log("how about this this", this)
     return (
       <div>
         <h2>WHATS IN YOUR CAULDRON</h2>
@@ -50,7 +51,6 @@ export class Cart extends React.Component {
           {cart.map(function(singleItem, idx) {
             // console.log("WHAT IS THIS? ", this)
             return (
-              //CHECK TO MAKE SURE LINKS WORK AFTER WE PULL REQUEST
               <div key={idx}>
                 <Link to={`/items/${singleItem.id}`}>
                   <h3>{singleItem.name}</h3>
@@ -77,16 +77,18 @@ export class Cart extends React.Component {
         </form>
         <h3>
           TOTAL:{' '}
-          {cart.reduce((accum, singleItem) => {
-            return accum + singleItem.price * singleItem.cart.quantity
-          }, 0)}
+          {Math.round(
+            cart.reduce((accum, singleItem) => {
+              return accum + singleItem.price * singleItem.cart.quantity
+            }, 0) * 100
+          ) / 100}
         </h3>
       </div>
     )
   }
 }
 
-//I mapped my state to props, and one of the keys is "countries"
+//I mapped my state to props, and one of the keys is "cart"
 function mapStateToProps(state) {
   return {
     cart: state.cart
