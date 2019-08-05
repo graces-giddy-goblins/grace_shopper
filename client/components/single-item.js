@@ -3,20 +3,6 @@ import {fetchSingleItem} from '../store/items'
 import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 
-const mapStateToProps = state => {
-  return {
-    singleItem: state.items.singleItem,
-    cart: state.cart.cart
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchSingleItem: id => dispatch(fetchSingleItem(id)),
-    addToCartThunk: item => dispatch(addToCartThunk(item))
-  }
-}
-
 const defaultState = {
   quantity: 1
 }
@@ -73,6 +59,20 @@ class SingleItem extends React.Component {
         </form>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    singleItem: state.items.singleItem,
+    cart: state.cart.cart
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchSingleItem: id => dispatch(fetchSingleItem(id)),
+    addToCartThunk: item => dispatch(addToCartThunk(item))
   }
 }
 

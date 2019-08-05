@@ -77,8 +77,33 @@ export const completeOrderThunk = orderId => {
     try {
       const res = await axios.put(`api/cart/${orderId}`)
       dispatch(completeOrder(res.data))
+    } catch(err) {
+      console.error(err)
+    }
+  }
+}
+
+export const updateCartThunk = item => {
+  return async dispatch => {
+    try {
+      const res = await axios.put('api/cart', item)
+      dispatch(updateCart(res.data))
     } catch (err) {
       console.error(err)
+    }
+  }
+}
+
+
+export const deleteCartItemThunk = itemId => {
+  return async dispatch => {
+    try {
+      //NEED TO DISPATCH BEFORE WE DELETE THE ITEM IN DATABAS
+      dispatch(deleteItem(itemId))
+
+      const res = await axios.delete('api/cart', itemId)
+    } catch (err) {
+      console.log(err)
     }
   }
 }
@@ -94,9 +119,15 @@ export default function(state = initalState, action) {
         cart: action.cart
       }
     case ADD_TO_CART:
+      return {...state, cart: [...state.cart, action.item]}
+    case UPDATE_CART:
+      return {...state, cart: action.item}
+    case DELETE_ITEM:
       return {
         ...state,
-        cart: [...state.cart, action.item]
+        cart: state.cart.filter(function(item) {
+          return item.id !== action.itemId
+        })
       }
     case REMOVE_CART:
       return initalState

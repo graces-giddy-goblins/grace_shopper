@@ -39,12 +39,12 @@ const items = [
   }
 ]
 
-const codysOrders = [
-  {
-    complete: false,
-    userId: 1
-  }
-]
+// const codysOrders = [
+//   {
+//     complete: false,
+//     userId: 1
+//   }
+// ]
 
 // const codysCart = [
 //   {
@@ -69,11 +69,11 @@ async function seed() {
     })
   )
 
-  let all_Order = await Promise.all(
-    codysOrders.map(function(order) {
-      return Order.create(order)
-    })
-  )
+  // let all_Order = await Promise.all(
+  //   codysOrders.map(function(order) {
+  //     return Order.create(order)
+  //   })
+  // )
 
   // let all_Carts = await Promise.all(
   //   codysCart.map(function(cart) {
