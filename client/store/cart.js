@@ -66,6 +66,19 @@ export const updateCartThunk = item => {
   }
 }
 
+export const deleteCartItemThunk = itemId => {
+  return async dispatch => {
+    try {
+      //NEED TO DISPATCH BEFORE WE DELETE THE ITEM IN DATABAS
+      dispatch(deleteItem(itemId))
+
+      const res = await axios.delete('api/cart', itemId)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -80,6 +93,13 @@ export default function(state = initalState, action) {
       return {...state, cart: [...state.cart, action.item]}
     case UPDATE_CART:
       return {...state, cart: action.item}
+    case DELETE_ITEM:
+      return {
+        ...state,
+        cart: state.cart.filter(function(item) {
+          return item.id !== action.itemId
+        })
+      }
     case REMOVE_CART:
       return initalState
     default:

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCartThunk, updateCartThunk} from '../store/cart'
+import {getCartThunk, updateCartThunk, deleteCartItemThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 
 const defaultState = {
@@ -71,6 +71,15 @@ export class Cart extends React.Component {
                   onChange={this.handleChange}
                 />
                 <button type="submit">Update Quantity</button>
+                <button
+                  type="button"
+                  name="remove"
+                  onClick={() => {
+                    this.props.deleteCartItemThunk(singleItem.id)
+                  }}
+                >
+                  Remove Item
+                </button>
               </div>
             )
           }, this)}
@@ -102,6 +111,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateCartThunk: function(item) {
       dispatch(updateCartThunk(item))
+    },
+    deleteCartItemThunk: function(itemId) {
+      dispatch(deleteCartItemThunk(itemId))
     }
   }
 }

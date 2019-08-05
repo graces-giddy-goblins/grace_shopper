@@ -66,7 +66,7 @@ router.delete('/', async (req, res, next) => {
 
     const deletedItem = await foundCart.destroy({
       where: {
-        itemId: req.body
+        itemId: req.body.itemId
       }
     })
     res.send(deletedItem)
