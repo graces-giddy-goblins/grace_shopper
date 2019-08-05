@@ -48,7 +48,10 @@ router.put('/', async (req, res, next) => {
 router.put('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.orderId)
-    res.json(order)
+    const updatedOrder = await order.update({
+      complete: true
+    })
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

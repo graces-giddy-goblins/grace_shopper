@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import completeOrderThunk from '../store/cart'
+import {completeOrderThunk} from '../store/cart'
 
-// const mapStateToProps = state => {
-//   return {
-
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    user: state.user
+    // cart: state.cart
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -72,4 +73,4 @@ export class Checkout extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

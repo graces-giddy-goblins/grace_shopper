@@ -102,7 +102,8 @@ export default function(state = initalState, action) {
       return initalState
     case COMPLETE_ORDER:
       return {
-        order: !state.order.complete
+        ...state,
+        cart: initalState
       }
     default:
       return state
