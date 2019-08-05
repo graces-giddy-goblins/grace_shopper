@@ -49,6 +49,18 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId)
+    const updatedOrder = await order.update({
+      complete: true
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({

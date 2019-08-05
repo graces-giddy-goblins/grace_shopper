@@ -7,7 +7,7 @@ import AllItems from './components/all-Items' //using the export default connect
 import {me} from './store'
 import SingleItem from './components/single-item'
 import Cart from './components/cart'
-
+import Checkout from './components/checkout'
 /**
  * COMPONENT
  */
@@ -27,7 +27,7 @@ class Routes extends Component {
         <Route exact path="/items" component={AllItems} />
         <Route path="/items/:id" component={SingleItem} />
         <Route exact path="/cart" component={Cart} />
-
+        <Route exact path="/cart/:orderId" component={Checkout} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
