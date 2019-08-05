@@ -89,6 +89,7 @@ router.post('/', async (req, res, next) => {
     for (let i = 0; i < cartTable.length; i++) {
       if (cartTable[i].itemId === req.body.itemId) {
         cartTable[i].quantity += req.body.quantity
+        await cartTable[i].save()
         found = true
       }
     }
