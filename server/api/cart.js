@@ -3,7 +3,7 @@ const {Items, Cart, Order, User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('USER ', req.user)
+    // console.log('USER ', req.user)
     const order = await Order.findOne({
       where: {
         //when we logged-in, it created a req.user which has an id
@@ -79,31 +79,40 @@ router.post('/', async (req, res, next) => {
         complete: false
       }
     })
+
+    // console.log("WHERE'S MY ORDER", order)
+
     if (!order) {
       order = await Order.create({
-        userId: req.user.id
+        userId: req.user.id,
+        complete: false
       })
     }
-    const cartTable = await order.getItems()
-    let found = false
-    for (let i = 0; i < cartTable.length; i++) {
-      if (cartTable[i].itemId === req.body.itemId) {
-        cartTable[i].quantity += req.body.quantity
-        await cartTable[i].save()
-        found = true
+
+    let itemUpdate = await Cart.findOne({
+      where: {
+        orderId: order.id,
+        itemId: req.body.itemId
       }
-    }
+    })
+    console.log('IS THERE AN ORDER UPDATE', itemUpdate)
     //FIX ADDING DUPLICATES ROUTE
-    if (!found) {
+
+    //if item is not in cart, create a new item in cart
+    if (!itemUpdate) {
       const newCartItem = await Cart.create({
         orderId: order.id,
         itemId: req.body.itemId,
         quantity: req.body.quantity
       })
+    } else {
+      await itemUpdate.update({
+        quantity: Number(itemUpdate.quantity) + Number(req.body.quantity)
+      })
     }
     const item = await order.getItems()
     const lastItem = item[item.length - 1]
-    console.log(lastItem)
+    // console.log(lastItem)
     //want to send back what your redux store will actually be putting into our cart array
     res.json(lastItem)
   } catch (err) {
