@@ -93,8 +93,8 @@ export const deleteCartItemThunk = itemId => {
     try {
       //NEED TO DISPATCH BEFORE WE DELETE THE ITEM IN DATABAS
       dispatch(deleteItem(itemId))
-
-      const res = await axios.delete('api/cart', itemId)
+      console.log('deletethunk', itemId)
+      const res = await axios.delete(`/api/cart/${itemId}`, itemId)
     } catch (err) {
       console.log(err)
     }

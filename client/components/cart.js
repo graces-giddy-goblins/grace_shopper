@@ -44,6 +44,7 @@ export class Cart extends React.Component {
     if (cart === undefined) {
       return <div>Loading...</div>
     }
+    console.log('cart', cart)
     return (
       <div>
         <h2>WHATS IN YOUR CAULDRON</h2>
