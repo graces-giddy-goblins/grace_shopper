@@ -5,11 +5,8 @@ const {Items, Cart, Order, User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    if (req.user == undefined) {
-      console.log('cart', req.session.cart)
+    if (req.user === undefined) {
       res.send(req.session.cart)
-      //let cart = await Object.values(Window.localStorage)
-      //res.send(cart)
     } else {
       const order = await Order.findOne({
         where: {
@@ -32,27 +29,38 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const foundOrder = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        complete: false
+    if (req.user === undefined) {
+      for (let i = 0; i < req.session.cart.length; i++) {
+        let currentItem = req.session.cart[i]
+        if (currentItem.id === Number(req.body.itemId)) {
+          currentItem.cart.quantity = Number(req.body.quantity)
+          req.session.save()
+        }
       }
-    })
+      res.send(req.session.cart)
+    } else {
+      const foundOrder = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          complete: false
+        }
+      })
 
-    const foundCart = await Cart.findOne({
-      where: {
-        orderId: foundOrder.id,
-        itemId: req.body.itemId
-      }
-    })
+      const foundCart = await Cart.findOne({
+        where: {
+          orderId: foundOrder.id,
+          itemId: req.body.itemId
+        }
+      })
 
-    const updatedCart = await foundCart.update({
-      quantity: req.body.quantity
-    })
+      const updatedCart = await foundCart.update({
+        quantity: req.body.quantity
+      })
 
-    const fullUpdatedCart = await foundOrder.getItems()
+      const fullUpdatedCart = await foundOrder.getItems()
 
-    res.send(fullUpdatedCart)
+      res.send(fullUpdatedCart)
+    }
   } catch (err) {
     next(err)
   }
@@ -75,27 +83,29 @@ router.put('/:orderId', async (req, res, next) => {
   }
 })
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:itemId', async (req, res, next) => {
   try {
-    const foundOrder = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        complete: false
-      }
-    })
-
-    const foundCart = await Cart.findOne({
-      where: {
-        orderId: foundOrder.id
-      }
-    })
-
-    const deletedItem = await foundCart.destroy({
-      where: {
-        itemId: req.body.itemId
-      }
-    })
-    res.send(deletedItem)
+    if (req.user === undefined) {
+      req.session.cart = req.session.cart.filter(function(item) {
+        return item.id !== Number(req.params.itemId)
+      })
+      req.session.save()
+      res.send(req.session.cart)
+    } else {
+      const foundOrder = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          complete: false
+        }
+      })
+      const destroyCart = await Cart.destroy({
+        where: {
+          orderId: foundOrder.id,
+          itemId: req.params.itemId
+        }
+      })
+      res.sendStatus(204)
+    }
   } catch (err) {
     next(err)
   }
@@ -127,7 +137,6 @@ router.post('/', async (req, res, next) => {
         item.imageUrl = itemLikeObject.imageUrl
         item.price = itemLikeObject.price
         item.description = itemLikeObject.description
-        console.log('item', item)
         item.cart = {
           quantity: req.body.quantity,
           itemId: Number(req.body.itemId),
