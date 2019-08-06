@@ -26,7 +26,7 @@ const items = [
       'https://images-na.ssl-images-amazon.com/images/I/71qwadFXbWL._SX355_.jpg',
     price: 499.99,
     description:
-      "Having trouble keeping your significant other? Want that cutie that sits at the back of class? Now it's easier than ever to get their affection! Just slip some love potion into their drink and...viola! Enough potion in each vile for five days."
+      "Having trouble keeping your significant other? Want that cutie that sits at the back of class? Now it's easier than ever to get their affection! Just slip some love potion into their drink and...voila! Enough potion in each vial for five days."
   },
   {
     name: 'Whacky Broomstick',
@@ -38,21 +38,6 @@ const items = [
       'Being whacked has never been so easy! Buy one of these stylish broomsticks and whack whomever you want, whenever you want!'
   }
 ]
-
-// const codysOrders = [
-//   {
-//     complete: false,
-//     userId: 1
-//   }
-// ]
-
-// const codysCart = [
-//   {
-//     quantity: 1,
-//     orderId: 1,
-//     itemId: 4
-//   }
-// ]
 
 async function seed() {
   await db.sync({force: true})
