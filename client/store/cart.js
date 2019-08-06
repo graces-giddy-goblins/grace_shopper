@@ -9,7 +9,6 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const DELETE_ITEM = 'DELETE_ITEM'
 const REMOVE_CART = 'REMOVE_CART'
-const COMPLETE_ORDER = 'COMPLETE_ORDER'
 
 /**
  * INITIAL STATE
@@ -38,13 +37,8 @@ const deleteItem = itemId => ({
   itemId
 })
 //check if we need cart action
-const removeCart = cart => ({
-  type: REMOVE_CART,
-  cart
-})
-const completeOrder = order => ({
-  type: COMPLETE_ORDER,
-  order
+const removeCart = () => ({
+  type: REMOVE_CART
 })
 
 /**
@@ -75,9 +69,9 @@ export const addToCartThunk = item => {
 export const completeOrderThunk = orderId => {
   return async dispatch => {
     try {
-      const res = await axios.put(`api/cart/${orderId}`)
-      dispatch(completeOrder(res.data))
-    } catch(err) {
+      await axios.put(`/api/cart/${orderId}`)
+      dispatch(removeCart())
+    } catch (err) {
       console.error(err)
     }
   }
@@ -86,14 +80,13 @@ export const completeOrderThunk = orderId => {
 export const updateCartThunk = item => {
   return async dispatch => {
     try {
-      const res = await axios.put('api/cart', item)
+      const res = await axios.put('/api/cart', item)
       dispatch(updateCart(res.data))
     } catch (err) {
       console.error(err)
     }
   }
 }
-
 
 export const deleteCartItemThunk = itemId => {
   return async dispatch => {
@@ -131,11 +124,6 @@ export default function(state = initalState, action) {
       }
     case REMOVE_CART:
       return initalState
-    case COMPLETE_ORDER:
-      return {
-        ...state,
-        cart: initalState
-      }
     default:
       return state
   }
