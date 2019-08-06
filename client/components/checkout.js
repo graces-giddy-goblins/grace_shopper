@@ -41,8 +41,8 @@ export class Checkout extends React.Component {
   }
 
   render() {
-    console.log('***', this.props)
-    console.log('state', this.state)
+    // console.log('***', this.props)
+    // console.log('state', this.state)
     const {name, address, city, state, zip} = this.state
     const {handleSubmit, handleChange} = this
     return (
