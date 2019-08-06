@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCartThunk, updateCartThunk, deleteCartItemThunk} from '../store/cart'
@@ -26,7 +27,7 @@ export class Cart extends React.Component {
       itemId: this.state.id
     }
     this.props.updateCartThunk(cartItem)
-    console.log('WHAT IS BEING DISPATCHED', cartItem)
+    // console.log('WHAT IS BEING DISPATCHED', cartItem)
   }
 
   handleChange(event) {
@@ -38,8 +39,7 @@ export class Cart extends React.Component {
 
   render() {
     let {cart} = this.props.cart
-    // let state = this.state
-    // let handleChange = this.handleChange
+    let orderId
 
     if (cart === undefined) {
       return <div>Loading...</div>
@@ -92,6 +92,13 @@ export class Cart extends React.Component {
             }, 0) * 100
           ) / 100}
         </h3>
+        <h4>Order #: {cart['0'] && (orderId = cart['0'].cart.orderId)}</h4>
+
+        <Link to={`/cart/${orderId}`}>
+          <button type="button" name="checkout">
+            Checkout
+          </button>
+        </Link>
       </div>
     )
   }
