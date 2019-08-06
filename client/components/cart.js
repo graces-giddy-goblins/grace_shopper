@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCartThunk, updateCartThunk, deleteCartItemThunk} from '../store/cart'
+import {me} from '../store/user'
 import {Link} from 'react-router-dom'
 
 const defaultState = {
@@ -17,6 +18,7 @@ export class Cart extends React.Component {
   }
   componentDidMount() {
     this.props.getCartThunk()
+    this.props.me()
   }
 
   handleSubmit(event) {
@@ -38,12 +40,24 @@ export class Cart extends React.Component {
 
   render() {
     let {cart} = this.props.cart
+    let {user} = this.props.user
+    // console.log('localstorage', window.localStorage)
+    // console.log('user', this.props.user)
     // let state = this.state
     // let handleChange = this.handleChange
 
-    if (cart === undefined) {
+    if (cart == null) {
       return <div>Loading...</div>
     }
+    // } else {
+    //   if (user !== undefined) {
+    //     if (user.name === undefined) {
+    //       cart = window.localStorage
+    //     }
+    //   }
+    // }
+    console.log('cart', cart)
+    console.log('user', user)
     return (
       <div>
         <h2>WHATS IN YOUR CAULDRON</h2>
@@ -100,7 +114,8 @@ export class Cart extends React.Component {
 //I mapped my state to props, and one of the keys is "cart"
 function mapStateToProps(state) {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
@@ -114,6 +129,9 @@ function mapDispatchToProps(dispatch) {
     },
     deleteCartItemThunk: function(itemId) {
       dispatch(deleteCartItemThunk(itemId))
+    },
+    me: function() {
+      dispatch(me())
     }
   }
 }
