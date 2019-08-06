@@ -47,7 +47,7 @@ export class Cart extends React.Component {
     console.log('cart', cart)
     return (
       <div>
-        <h2>WHATS IN YOUR CAULDRON</h2>
+        <h2>WHAT'S IN YOUR CAULDRON</h2>
         <form onSubmit={this.handleSubmit}>
           {cart.map(function(singleItem, idx) {
             // console.log("WHAT IS THIS? ", this)
