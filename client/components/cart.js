@@ -48,58 +48,65 @@ export class Cart extends React.Component {
     return (
       <div>
         <h2>WHAT'S IN YOUR CAULDRON</h2>
-        <form onSubmit={this.handleSubmit}>
-          {cart.map(function(singleItem, idx) {
-            // console.log("WHAT IS THIS? ", this)
-            return (
-              <div key={idx}>
-                <Link to={`/items/${singleItem.id}`}>
-                  <h3>{singleItem.name}</h3>
-                </Link>
-                <h3>Price: {singleItem.price}</h3>
-                <h3>Qty: {singleItem.cart.quantity}</h3>
-                <Link to={`/items/${singleItem.id}`}>
-                  <img src={singleItem.imageUrl} />
-                </Link>
-                Quantity{' '}
-                <input
-                  type="number"
-                  name="quantity"
-                  min="1"
-                  max="30"
-                  id={singleItem.id}
-                  value={this.state.quantity}
-                  onChange={this.handleChange}
-                />
-                <button type="submit">Update Quantity</button>
-                <button
-                  type="button"
-                  name="remove"
-                  onClick={() => {
-                    this.props.deleteCartItemThunk(singleItem.id)
-                  }}
-                >
-                  Remove Item
-                </button>
-              </div>
-            )
-          }, this)}
-        </form>
-        <h3>
-          TOTAL:{' '}
-          {Math.round(
-            cart.reduce((accum, singleItem) => {
-              return accum + singleItem.price * singleItem.cart.quantity
-            }, 0) * 100
-          ) / 100}
-        </h3>
-        <h4>Order #: {cart['0'] && (orderId = cart['0'].cart.orderId)}</h4>
+        {cart.length === 0 ? (
+          <h1>Empty Cauldron</h1>
+        ) : (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              {cart.map(function(singleItem, idx) {
+                // console.log("WHAT IS THIS? ", this)
+                return (
+                  <div key={idx}>
+                    <Link to={`/items/${singleItem.id}`}>
+                      <h3>{singleItem.name}</h3>
+                    </Link>
+                    <h3>Price: {singleItem.price}</h3>
+                    <h3>Qty: {singleItem.cart.quantity}</h3>
+                    <Link to={`/items/${singleItem.id}`}>
+                      <img src={singleItem.imageUrl} />
+                    </Link>
+                    Quantity{' '}
+                    <input
+                      type="number"
+                      name="quantity"
+                      min="1"
+                      max="30"
+                      id={singleItem.id}
+                      value={this.state.quantity}
+                      onChange={this.handleChange}
+                    />
+                    <button type="submit">Update Quantity</button>
+                    <button
+                      type="button"
+                      name="remove"
+                      onClick={() => {
+                        this.props.deleteCartItemThunk(singleItem.id)
+                      }}
+                    >
+                      Remove Item
+                    </button>
+                  </div>
+                )
+              }, this)}
+            </form>
 
-        <Link to={`/cart/${orderId}`}>
-          <button type="button" name="checkout">
-            Checkout
-          </button>
-        </Link>
+            <h3>
+              TOTAL:{' '}
+              {Math.round(
+                cart.reduce((accum, singleItem) => {
+                  return accum + singleItem.price * singleItem.cart.quantity
+                }, 0) * 100
+              ) / 100}
+            </h3>
+
+            <h4>Order #: {cart['0'] && (orderId = cart['0'].cart.orderId)}</h4>
+            <Link to={`/cart/${orderId}`}>
+              <button type="button" name="checkout">
+                Checkout
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     )
   }
