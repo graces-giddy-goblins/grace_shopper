@@ -8,11 +8,13 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-
+  const bannerImage =
+    'https://user-images.githubusercontent.com/34967988/62590163-7a20fc80-b899-11e9-9c82-859bedfaaf54.png'
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
+          <img className="img-fluid" src={bannerImage} />
           <label htmlFor="email">
             <small>Email</small>
           </label>
