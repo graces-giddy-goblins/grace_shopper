@@ -23,7 +23,7 @@ export class AllItems extends React.Component {
                 <Link to={`/items/${singleItem.id}`}>
                   <h3>{singleItem.name}</h3>
                 </Link>
-                <h3>{singleItem.price}</h3>
+                <h3>${singleItem.price}</h3>
                 <div style={{maxWidth: '200px', maxHeight: '200px'}}>
                   <Link to={`/items/${singleItem.id}`}>
                     <img

@@ -77,7 +77,7 @@ export class Cart extends React.Component {
                             <h5 className="card-title">{singleItem.name}</h5>
                           </Link>
                           <div className="card-text">
-                            <h3>Price: {singleItem.price}</h3>
+                            <h3>Price: ${singleItem.price}</h3>
                             <h3>Qty: {singleItem.cart.quantity}</h3>
                           </div>
                         </div>
@@ -117,8 +117,7 @@ export class Cart extends React.Component {
             </form>
 
             <h3>
-              TOTAL:{' '}
-              {Math.round(
+              TOTAL: ${Math.round(
                 cart.reduce((accum, singleItem) => {
                   return accum + singleItem.price * singleItem.cart.quantity
                 }, 0) * 100

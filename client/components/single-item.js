@@ -44,7 +44,7 @@ class SingleItem extends React.Component {
           <img src={imageUrl} />
         </div>
         <div className="col-sm">
-          <h3>{price}</h3>
+          <h3>${price}</h3>
           <h3>{description}</h3>
 
           <form className="j" onSubmit={this.handleSubmit}>
