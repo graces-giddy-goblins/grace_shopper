@@ -18,14 +18,21 @@ export class AllItems extends React.Component {
         {items.map(function(singleItem, idx) {
           return (
             //CHECK TO MAKE SURE LINKS WORK AFTER WE PULL REQUEST
-            <div key={idx}>
-              <Link to={`/items/${singleItem.id}`}>
-                <h3>{singleItem.name}</h3>
-              </Link>
-              <h3>{singleItem.price}</h3>
-              <Link to={`/items/${singleItem.id}`}>
-                <img src={singleItem.imageUrl} />
-              </Link>
+            <div className="items card" key={idx}>
+              <div className="card-body">
+                <Link to={`/items/${singleItem.id}`}>
+                  <h3>{singleItem.name}</h3>
+                </Link>
+                <h3>${singleItem.price}</h3>
+                <div style={{maxWidth: '200px', maxHeight: '200px'}}>
+                  <Link to={`/items/${singleItem.id}`}>
+                    <img
+                      className="img-fluid rounded"
+                      src={singleItem.imageUrl}
+                    />
+                  </Link>
+                </div>
+              </div>
             </div>
           )
         })}

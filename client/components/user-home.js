@@ -1,16 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {email} = props
-
+  const bannerImage =
+    'https://user-images.githubusercontent.com/34967988/62590163-7a20fc80-b899-11e9-9c82-859bedfaaf54.png'
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <div className="jumbotron">
+        <h1 className="display-4">GRACE'S GIDDY'S GOBLINS </h1>
+        <p className="lead">Welcome, {email}</p>
+
+        <Link className="btn btn-primary btn-lg" to="/items">
+          SHOP
+        </Link>
+      </div>
+      <div>
+        <img className="img-fluid" src={bannerImage} />
+      </div>
     </div>
   )
 }

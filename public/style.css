@@ -14,8 +14,12 @@ nav a {
   display: inline-block;
   margin: 1em;
 }
-
+/* 
 form div {
   margin: 1em;
   display: inline-block;
+} */
+
+.btn {
+  margin: 4px;
 }
