@@ -7,10 +7,12 @@ import {connect} from 'react-redux'
  */
 export const UserHome = props => {
   const {email} = props
-
+  const bannerImage =
+    'https://user-images.githubusercontent.com/34967988/62590163-7a20fc80-b899-11e9-9c82-859bedfaaf54.png'
   return (
     <div>
       <h3>Welcome, {email}</h3>
+      <img className="img-fluid" src={bannerImage} />
     </div>
   )
 }

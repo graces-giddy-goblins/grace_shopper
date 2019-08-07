@@ -36,27 +36,41 @@ class SingleItem extends React.Component {
     if (!this.props.singleItem.name) {
       return <div>Loading...</div>
     }
-    return (
-      <div>
-        <h3>{name}</h3>
-        <img src={imageUrl} />
-        <h3>{price}</h3>
-        <h3>{description}</h3>
 
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            Quantity{' '}
-            <input
-              type="number"
-              name="quantity"
-              min="1"
-              max="30"
-              value={this.state.quantity}
-              onChange={this.handleChange}
-            />
-            <button type="submit">Add to Cart</button>
-          </p>
-        </form>
+    return (
+      <div className="row">
+        <div className="col-sm">
+          <h3>{name}</h3>
+          <img src={imageUrl} />
+        </div>
+        <div className="col-sm">
+          <h3>{price}</h3>
+          <h3>{description}</h3>
+
+          <form className="j" onSubmit={this.handleSubmit}>
+            <div className="row">
+              <div className="col-sm-3 text-right">
+                <label htmlFor="quantity">Quantity</label>
+              </div>
+              <div className="col-sm-3">
+                <input
+                  className="form-control"
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  max="30"
+                  value={this.state.quantity}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="col-sm-6">
+                <button className="btn btn-primary" type="submit">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

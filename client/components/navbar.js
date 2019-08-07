@@ -6,11 +6,14 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>GRACE'S GIDDY GOBLINS</h1>
+    <h1 />
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="navbar navbar-dark">
           {/* The navbar will show these links after you log in */}
+          <Link to="/home" className="nav-bar-brand">
+            GRACE'S GIDDY GOBLINS
+          </Link>
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
@@ -19,8 +22,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/cart">View Cart</Link>
         </div>
       ) : (
-        <div>
+        <div className="navbar navbar-dark">
           {/* The navbar will show these links before you log in */}
+          <Link to="/home" className="nav-bar-brand">
+            GRACE'S GIDDY GOBLINS
+          </Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/items">SHOP</Link>

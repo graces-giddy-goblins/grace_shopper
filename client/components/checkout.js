@@ -48,21 +48,47 @@ export class Checkout extends React.Component {
     return (
       <form onSubmit={handleSubmit}>
         <label>Name: </label>
-        <input onChange={handleChange} value={name} type="text" name="name" />
+        <input
+          className="form-control"
+          onChange={handleChange}
+          value={name}
+          type="text"
+          name="name"
+        />
         <label>Address: </label>
         <input
+          className="form-control"
           onChange={handleChange}
           value={address}
           type="text"
           name="address"
         />
         <label>City: </label>
-        <input onChange={handleChange} value={city} type="text" name="city" />
+        <input
+          className="form-control"
+          onChange={handleChange}
+          value={city}
+          type="text"
+          name="city"
+        />
         <label>State: </label>
-        <input onChange={handleChange} value={state} type="text" name="state" />
+        <input
+          className="form-control"
+          onChange={handleChange}
+          value={state}
+          type="text"
+          name="state"
+        />
         <label>Zip: </label>
-        <input onChange={handleChange} value={zip} type="number" name="zip" />
+        <input
+          className="form-control"
+          onChange={handleChange}
+          value={zip}
+          type="number"
+          name="zip"
+        />
         <button
+          className="btn btn-primary"
           type="submit"
           disabled={!name || !address || !city || !state || !zip}
         >
