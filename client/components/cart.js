@@ -49,7 +49,10 @@ export class Cart extends React.Component {
       <div>
         <h2>WHAT'S IN YOUR CAULDRON?</h2>
         {cart.length === 0 ? (
-          <h1>Empty Cauldron</h1>
+          <div>
+            <h1>Nothing Brewing Yet!</h1>
+            <img src="https://user-images.githubusercontent.com/34967988/62626595-bbdf9080-b8f5-11e9-8b4e-5138ddb11546.png" />
+          </div>
         ) : (
           <div>
             <form onSubmit={this.handleSubmit}>
