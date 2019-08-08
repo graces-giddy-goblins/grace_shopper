@@ -13,7 +13,7 @@ export const UserHome = props => {
   return (
     <div>
       <div className="jumbotron">
-        <h1 className="display-4">GRACE'S GIDDY'S GOBLINS </h1>
+        <h1 className="display-4">GRACE'S GIDDY GOBLINS </h1>
         <p className="lead">Welcome, {email}</p>
 
         <Link className="btn btn-primary btn-lg" to="/items">
