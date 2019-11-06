@@ -12,7 +12,7 @@ export const GuestHome = props => {
   return (
     <div>
       <div className="jumbotron">
-        <h1 className="display-4">GRACE'S GIDDY'S GOBLINS</h1>
+        <h1 className="display-4">GRACE'S GIDDY GOBLINS</h1>
         <div className="text-primary">
           <p className="lead" className="font-weight-bold" className="h4">
             {' '}
